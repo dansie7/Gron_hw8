@@ -15,9 +15,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define SIZE 80
 /* Function Prototypes */
 void Usage(char ** info);
+void StringIn(char str1[], char str2[]);
+
 /* Main Program */
 int main(int argc, char *argv[])
 {
@@ -25,6 +26,7 @@ int main(int argc, char *argv[])
 	{
 		Usage(&argv[1]);
 	}
+	StringIn(argv[1], argv[2]);
 
 	return 0;
 }
@@ -33,7 +35,7 @@ int main(int argc, char *argv[])
 /* Function Defenitions */
 void Usage(char ** info)
 {
-	char str1[SIZE] = "--help";
+	char str1[7] = "--help";
 	if(strcmp(*info, str1) == 0)
 	{
 		printf("Help Information\n");
@@ -48,8 +50,41 @@ void Usage(char ** info)
 		printf("Program checks if str2 is part of str1\n");
 		exit(1);
 	}
-
 	return;
 }
+
+void StringIn(char str1[], char str2[])
+{
+	if(strstr(str1, str2) == NULL)
+	{
+		printf("<%s> NOT found in <%s>\n", str2, str1);
+		printf("Returned string <(NULL)>\n");
+	}
+	else
+	{
+		printf("<%s> found in <%s>\n", str2, str1);
+		printf("Returned string <%s>\n", strstr(str1, str2));
+	}
+	return;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
