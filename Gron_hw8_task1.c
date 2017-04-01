@@ -21,6 +21,11 @@ void Usage(char ** info);
 /* Main Program */
 int main(int argc, char *argv[])
 {
+	if(argc != 3)
+	{
+		Usage(&argv[1]);
+	}
+
 	return 0;
 }
 
@@ -28,8 +33,8 @@ int main(int argc, char *argv[])
 /* Function Defenitions */
 void Usage(char ** info)
 {
-	char str1[SIZE] == "--help";
-	if(strcmp(*info, str1) == 0 )
+	char str1[SIZE] = "--help";
+	if(strcmp(*info, str1) == 0)
 	{
 		printf("Help Information\n");
 		printf("Usage ./task1 <str1> <str2>\n");
