@@ -13,31 +13,43 @@
  */
 #include <stdio.h>		/* For Standard I/O */
 #include <stdlib.h>
-
-#define SIZE 2
+#include <string.h>
 /* Function Prototypes */
-void Usage(char ar[]);
+void Usage(char **info);
 
 /* Main Program */
 int main(int argc, char *argv[])
 {
-	char message[SIZE];
-	if (argc != 2)
+	char str1[7] = {'-','-','h','e','l','p'};
+	if(argc != 2)
 	{
-	printf("Missing or wrong numer of parameters\n");
-	Usage(message);
+	Usage(&argv[0]);
+	
 	}
-
+	else if((strcmp(argv[1], str1) == 0))
+	{
+	Usage(&argv[1]);
+	}
 	return 0;
 }
 
 
 /* Function Defenitions */
 
-void Usage(char ar[])
+void Usage(char **info)
 {
-
-	printf("Usage: ./task2 [-p | -u | -l]\n");
+	
+	char str1[7] = {'-','-','h','e','l','p'};
+	if((strcmp(*info, str1) == 0))
+	{
+	printf("\nHelp information\n");
+	printf("Usage: ./task2 [-p | -u | -l]\n\n");
+	}
+	else
+	{
+	printf("\nMissing or wrong numer of parameters\n");
+	printf("Usage: ./task2 [-p | -u | -l]\n\n");
+	}
 	
 	
 	return;
