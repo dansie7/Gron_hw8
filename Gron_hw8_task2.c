@@ -14,8 +14,12 @@
 #include <stdio.h>		/* For Standard I/O */
 #include <stdlib.h>
 #include <string.h>
+
+#define SIZE 80
 /* Function Prototypes */
 void Usage(char **info);
+void GetOptions(char *argv[]);
+
 
 /* Main Program */
 int main(int argc, char *argv[])
@@ -30,12 +34,32 @@ int main(int argc, char *argv[])
 	{
 	Usage(&argv[1]);
 	}
+	GetOptions(&argv[1]);
+	printf("through?[%s]\n",argv[1]);
+	
 	return 0;
 }
 
 
 /* Function Defenitions */
 
+void GetOptions(char *ar1[])
+{
+	char str2[SIZE];
+	strcpy(str2,*ar1);
+	char str3[] = "-p -u -l";
+	char n[SIZE];
+	if(strtok(str2, str3) != 0)
+	{
+	printf("%s is an invalid flag;using defalt flag (-p)\n",*ar1);
+	strcpy(n,&str3[1]);
+	}
+	else
+	{
+	strcpy(n,str3);
+	}
+	return;
+}
 void Usage(char **info)
 {
 	
