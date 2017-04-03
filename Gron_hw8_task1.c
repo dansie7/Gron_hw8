@@ -22,11 +22,20 @@ void StringIn(char str1[], char str2[]);
 /* Main Program */
 int main(int argc, char *argv[])
 {
-	if(argc != 3)
+	char str1[7] = "--help";
+
+	if(argc != 3 && ((argc == 1) || ((argc == 2) && !(strcmp(argv[1], str1) == 0))))
+	{
+		Usage(&argv[0]);
+	}
+	else if(strcmp(argv[1], str1) == 0)
 	{
 		Usage(&argv[1]);
 	}
-	StringIn(argv[1], argv[2]);
+	else
+	{
+		StringIn(argv[1], argv[2]);
+	}
 
 	return 0;
 }
@@ -38,16 +47,16 @@ void Usage(char ** info)
 	char str1[7] = "--help";
 	if(strcmp(*info, str1) == 0)
 	{
-		printf("Help Information\n");
+		printf("\nHelp Information\n");
 		printf("Usage ./task1 <str1> <str2>\n");
-		printf("Program checks if str2 is part of str1\n");
+		printf("Program checks if str2 is part of str1\n\n");
 		exit(1);
 	}
 	else
 	{
-		printf("Missing required parameters\n");
+		printf("\nMissing required parameters\n");
 		printf("Usage ./task1 <str1> <str2>\n");
-		printf("Program checks if str2 is part of str1\n");
+		printf("Program checks if str2 is part of str1\n\n");
 		exit(1);
 	}
 	return;
@@ -57,13 +66,13 @@ void StringIn(char str1[], char str2[])
 {
 	if(strstr(str1, str2) == NULL)
 	{
-		printf("<%s> NOT found in <%s>\n", str2, str1);
-		printf("Returned string <(NULL)>\n");
+		printf("\n<%s> NOT found in <%s>\n", str2, str1);
+		printf("Returned string <(NULL)>\n\n");
 	}
 	else
 	{
-		printf("<%s> found in <%s>\n", str2, str1);
-		printf("Returned string <%s>\n", strstr(str1, str2));
+		printf("\n<%s> found in <%s>\n", str2, str1);
+		printf("Returned string <%s>\n\n", strstr(str1, str2));
 	}
 	return;
 }
