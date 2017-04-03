@@ -27,27 +27,43 @@ char c;
 char stru[] = "-u";
 char strl[] ="-l";
 char strp[] = "-p";
+char print[SIZE];
 /* Main Program */
 
 int main(int argc, char *argv[])
 {
-	char str1[7] = {'-','-','h','e','l','p'};
-	if(argc != 2)
-	{
-	Usage(&argv[0]);
-	
-	}
-	else if((strcmp(argv[1], str1) == 0))
-	{
-	Usage(&argv[1]);
-	}
-	GetOptions(&argv[1]);
 	while(1)
 	{
-	PrintOption(c);
-	
-	}
+		char str1[7] = {'-','-','h','e','l','p'};
+		if(argc != 2)
+		{
+			Usage(&argv[0]);
+			break;
+		}
+		else if((strcmp(argv[1], str1) == 0))
+		{
+			Usage(&argv[1]);
+			break;
+		}
+		
+		GetOptions(&argv[1]);
+		
+		while(1)
+		{
+			PrintOption(c);
+			
+			if(scanf("%s",print) == EOF)
+			{
+				break;
+			}
+			else 
+			{
+				continue;
+			}
 
+		}
+		break;
+	}
 	return 0;
 }
 
@@ -56,33 +72,56 @@ int main(int argc, char *argv[])
 
 void PrintOption(char o)
 {
-	char print[SIZE];
 	char d;
 	int i = 0;
 	int camel = FALSE;
-	if(o == 'p');
-	{
-	while (i < (SIZE -1) && (d = getchar()) != '\n')
+	
+	while(i < (SIZE -1) && (d = getchar()) != '\n')
 	{
 		if(camel)
 		{
 			camel = FALSE;
-		
 		}
 		else
 		{
-			if(o == 'u')
-			{
-			 print[i] = toupper(d);
-			 continue;
-			}
 			print[i] = d;
 		}
 		i++;
 	}
 	print[i] = '\0';
-	printf("%s\n",print);
-	}
+
+		if(o == 'u')
+		{
+			for(i = 0; i< strlen(print); i++)
+			{
+				d = print[i];
+				print[i] = toupper(d);
+			}
+			print[i] = '\0';
+			printf("%s\n", print);
+		}
+		
+		if(o == 'l')
+		{
+			for(i = 0; i< strlen(print); i++)
+			{
+				d = print[i];
+				print[i] = tolower(d);
+			}
+			print[i] = '\0';
+			printf("%s\n", print);
+		}
+		
+		if(o == 'p')
+		{
+			for(i = 0; i< strlen(print); i++)
+			{
+				d = print[i];
+			}
+			print[i] = '\0';
+			printf("%s\n", print);
+		}
+
 	return;
 }
 void GetOptions(char *ar1[])
@@ -93,22 +132,26 @@ void GetOptions(char *ar1[])
 
 	if(strtok(str2, str3) != 0)
 	{
-	printf("%s is an invalid flag; using defalt flag (-p).\n",*ar1);
-	c = str3[1];
-	
+		printf("%s is an invalid flag; using defalt flag (-p).\n",*ar1);
+		c = str3[1];
+
 	}
+	
 	else if (strcmp(str2, stru) == 0)
 	{
-	c = str3[4];
+		c = str3[4];
 	}
+	
 	else if (strcmp(str2, strl) == 0)
 	{
-	c = str3[7];
+		c = str3[7];
 	}
+	
 	else if (strcmp(str2,strp) == 0)
 	{
-	c = str3[1];
+		c = str3[1];
 	}
+	
 	printf("selecting option %c\n", c);
 	printf("Type input. Output will be based on option\n");
 	printf("Enter Ctrl-D to stop user input: ");
@@ -119,11 +162,13 @@ void Usage(char **info)
 {
 	
 	char str1[7] = {'-','-','h','e','l','p'};
+	
 	if((strcmp(*info, str1) == 0))
 	{
 		printf("\nHelp information\n");
 		printf("Usage: ./task2 [-p | -u | -l]\n\n");
 	}
+	
 	else
 	{
 		printf("\nMissing or wrong numer of parameters\n");
