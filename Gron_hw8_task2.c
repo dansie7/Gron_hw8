@@ -18,13 +18,17 @@
 
 #define TRUE 1
 #define FALSE 0
-#define SIZE 80
+#define SIZE 81
 /* Function Prototypes */
 void Usage(char **info);
 void GetOptions(char *argv[]);
 void PrintOption(char o);
 char c;
+char stru[] = "-u";
+char strl[] ="-l";
+char strp[] = "-p";
 /* Main Program */
+
 int main(int argc, char *argv[])
 {
 	char str1[7] = {'-','-','h','e','l','p'};
@@ -55,14 +59,29 @@ void PrintOption(char o)
 	char print[SIZE];
 	char d;
 	int i = 0;
-		if(o == 'p')
-		{
-		while (i < (SIZE -1) && (d = getchar()) != '\n')
+	int camel = FALSE;
+	if(o == 'p');
 	{
-	print[i]= d;
-	puts(print);
-	i++;
+	while (i < (SIZE -1) && (d = getchar()) != '\n')
+	{
+		if(camel)
+		{
+			camel = FALSE;
+		
+		}
+		else
+		{
+			if(o == 'u')
+			{
+			 print[i] = toupper(d);
+			 continue;
+			}
+			print[i] = d;
+		}
+		i++;
 	}
+	print[i] = '\0';
+	printf("%s\n",print);
 	}
 	return;
 }
@@ -71,9 +90,6 @@ void GetOptions(char *ar1[])
 	char str2[SIZE];
 	strcpy(str2,*ar1);
 	char str3[] = "-p -u -l";
-	char stru[] = "-u";
-	char strl[] ="-l";
-	char strp[] = "-p";
 
 	if(strtok(str2, str3) != 0)
 	{
@@ -92,10 +108,11 @@ void GetOptions(char *ar1[])
 	else if (strcmp(str2,strp) == 0)
 	{
 	c = str3[1];
-	printf("\nselecting option p\n");
+	}
+	printf("selecting option %c\n", c);
 	printf("Type input. Output will be based on option\n");
 	printf("Enter Ctrl-D to stop user input: ");
-	}
+	
 	return;
 }
 void Usage(char **info)
