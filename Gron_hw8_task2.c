@@ -14,13 +14,16 @@
 #include <stdio.h>		/* For Standard I/O */
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
+#define TRUE 1
+#define FALSE 0
 #define SIZE 80
 /* Function Prototypes */
 void Usage(char **info);
 void GetOptions(char *argv[]);
-
-
+void PrintOption(char o);
+char c;
 /* Main Program */
 int main(int argc, char *argv[])
 {
@@ -35,28 +38,63 @@ int main(int argc, char *argv[])
 	Usage(&argv[1]);
 	}
 	GetOptions(&argv[1]);
-	printf("through?[%s]\n",argv[1]);
+	while(1)
+	{
+	PrintOption(c);
 	
+	}
+
 	return 0;
 }
 
 
 /* Function Defenitions */
 
+void PrintOption(char o)
+{
+	char print[SIZE];
+	char d;
+	int i = 0;
+		if(o == 'p')
+		{
+		while (i < (SIZE -1) && (d = getchar()) != '\n')
+	{
+	print[i]= d;
+	puts(print);
+	i++;
+	}
+	}
+	return;
+}
 void GetOptions(char *ar1[])
 {
 	char str2[SIZE];
 	strcpy(str2,*ar1);
 	char str3[] = "-p -u -l";
-	char n[SIZE];
+	char stru[] = "-u";
+	char strl[] ="-l";
+	char strp[] = "-p";
+
 	if(strtok(str2, str3) != 0)
 	{
-	printf("%s is an invalid flag;using defalt flag (-p)\n",*ar1);
-	strcpy(n,&str3[1]);
+	printf("%s is an invalid flag; using defalt flag (-p).\n",*ar1);
+	c = str3[1];
+	
 	}
-	else
+	else if (strcmp(str2, stru) == 0)
 	{
-	strcpy(n,str3);
+	c = str3[4];
+	}
+	else if (strcmp(str2, strl) == 0)
+	{
+	c = str3[7];
+	}
+	else if (strcmp(str2,strp) == 0)
+	{
+	c = str3[1];
+	printf("\nselecting option p\n");
+	printf("Type input. Output will be based on option\n");
+	printf("Enter Ctrl-D to stop user input: ");
 	}
 	return;
 }
@@ -66,13 +104,13 @@ void Usage(char **info)
 	char str1[7] = {'-','-','h','e','l','p'};
 	if((strcmp(*info, str1) == 0))
 	{
-	printf("\nHelp information\n");
-	printf("Usage: ./task2 [-p | -u | -l]\n\n");
+		printf("\nHelp information\n");
+		printf("Usage: ./task2 [-p | -u | -l]\n\n");
 	}
 	else
 	{
-	printf("\nMissing or wrong numer of parameters\n");
-	printf("Usage: ./task2 [-p | -u | -l]\n\n");
+		printf("\nMissing or wrong numer of parameters\n");
+		printf("Usage: ./task2 [-p | -u | -l]\n\n");
 	}
 	
 	
